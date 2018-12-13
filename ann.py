@@ -623,6 +623,7 @@ class ANNClassifier():
         print('Lowest testing error is for parameter set number: ', test_errs.index(min(test_errs)) + 1)
 
 def main():
+    # Synthetic data testing
     '''print('Getting data...')
     inputs, targets = synthetic_data()
     print('Initializing model...')
@@ -631,10 +632,11 @@ def main():
     print('Fitting model to data...')
     model.fit(inputs, targets, 1000, 10, 60, plot_errs=True, plot_confusion=True, confusion_labels=['c1', 'c2', 'c3', 'c4'])'''
 
+    # Credit data
     print('Getting data...')
     inputs, targets = get_data()
     print('Initializing model...')
-    model = ANNClassifier(0.005, 2, [25, 25], [1, 1], 0.9, 0.9)
+    model = ANNClassifier(0.005, 2, [30, 20], [1.0, 1.0, 1.0], 0.9, 0.9)
     inputs = model.add_input_bias_col(inputs)
     print('Fitting model to data...')
     model.fit(inputs, targets, 1000, 3, 250, plot_errs=True, plot_confusion=True, confusion_labels=['No', 'Yes'])
