@@ -147,7 +147,7 @@ class FinalLayer():
 
 class ANNClassifier():
     def __init__(self, learning_rate, no_hidden_layers, hidden_layer_depths, layers_pkeep, cache_decay_rate, nestrov_mu):
-        """Artifical neural network classifier
+        """Artificial neural network classifier
         
         Arguments:
             learning_rate {float} -- Learning rate for Gradient descent
