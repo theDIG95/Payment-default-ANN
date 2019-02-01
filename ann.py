@@ -146,12 +146,11 @@ class FinalLayer():
         )
 
 class ANNClassifier():
-    def __init__(self, learning_rate, no_hidden_layers, hidden_layer_depths, layers_pkeep, cache_decay_rate, nestrov_mu):
+    def __init__(self, learning_rate, hidden_layer_depths, layers_pkeep, cache_decay_rate, nestrov_mu):
         """Artificial neural network classifier
         
         Arguments:
             learning_rate {float} -- Learning rate for Gradient descent
-            no_hidden_layers {int} -- Number of hidden layers in the network, >= 1
             hidden_layer_depths {list} -- Depths of each layer, excluding final layer
             layers_pkeep {list} -- Probability of keeping nodes/neurons for each layer, including input layer
             cache_decay_rate {float} -- Cache decay rate for RMSProp
@@ -161,7 +160,7 @@ class ANNClassifier():
         # Learning rate
         self._lr = learning_rate
         # Number of hidden layers
-        self._no_hl = no_hidden_layers
+        self._no_hl = len(hidden_layer_depths)
         # Depth of hidden layers
         self._hl_depths = hidden_layer_depths
         # Reference to hidden layers
@@ -627,7 +626,7 @@ def main():
     '''print('Getting data...')
     inputs, targets = synthetic_data()
     print('Initializing model...')
-    model = ANNClassifier(0.005, 2, [3, 2], [1.0, 1.0, 1.0], 0.9, 0.9)
+    model = ANNClassifier(0.005, [3, 2], [1.0, 1.0, 1.0], 0.9, 0.9)
     inputs = model.add_input_bias_col(inputs)
     print('Fitting model to data...')
     model.fit(inputs, targets, 1000, 10, 60, plot_errs=True, plot_confusion=True, confusion_labels=['c1', 'c2', 'c3', 'c4'])'''
@@ -636,7 +635,7 @@ def main():
     print('Getting data...')
     inputs, targets = get_data()
     print('Initializing model...')
-    model = ANNClassifier(0.005, 2, [30, 20], [1.0, 1.0, 1.0], 0.9, 0.9)
+    model = ANNClassifier(0.005, [30, 20], [1.0, 1.0, 1.0], 0.9, 0.9)
     inputs = model.add_input_bias_col(inputs)
     print('Fitting model to data...')
     model.fit(inputs, targets, 1000, 3, 250, plot_errs=True, plot_confusion=True, confusion_labels=['No', 'Yes'])
