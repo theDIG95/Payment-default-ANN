@@ -41,7 +41,7 @@ For the 'payment default of credit cards dataset'
 
 ## Results
 
-Output of training
+Output of training [OLD VERSION'S DEBUGGING INFO]
 
 ```(bash)
 100  iterations,  20.69 % train error...
