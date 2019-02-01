@@ -11,7 +11,7 @@ Download the data and adjust `DATA_FILE_PATH` in `data_importer.py` accordingly.
 
 ### Other datasets
 
-The `ANNClassifier` can be used for any classification problem. The parameter's can be passed in the constructor and `fit`/`k_fold_x_validation` method for training.  
+The `ANNClassifier` can be used for any classification problem. The parameters can be passed in the constructor and `fit`/`k_fold_x_validation` method for training.  
 Weights can be saved and loaded by `save_weights` and `load_weights` methods.
 Predictions can be made via the `predict` method.  
 For further details please view the `ann.py` file, it contains docstrings and comments explaining each step of the process.
