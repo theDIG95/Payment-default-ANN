@@ -531,7 +531,10 @@ class ANNClassifier():
             err_rates.append(self._calc_error(targets_train, train_pred))
             # Print progress of training
             if (not i == 0) and ((i % 100) == 0):
-                print(i, ' iterations, ', err_rates[-1]*100, '% train error...')
+                _, temp_pred = self._pred_fn(inputs_test, targets_test)
+                temp_err = self._calc_error(targets_test, temp_pred)
+                print(i, ' iterations |', round(err_rates[-1]*100, 3), '% train error', end=' | ')
+                print(round(temp_err*100, 3), '% testing error ...')
             # Increment batch number
             batch_no += 1
             # Check batch number for overflow
