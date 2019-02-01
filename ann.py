@@ -30,15 +30,13 @@ class HiddenLayer():
         # Weight initial random values
         self._w_init = np.random.randn(self._input_feat, self.depth) / np.sqrt(self._input_feat + self.depth)
         # Updatable weights
-        self.weights = theano.shared(self._w_init, 'W')
+        self.weights = theano.shared(self._w_init, 'W_{}'.format(layer_no))
         # Layer's initial cache for RMSProp
         self._cache = 0
         # Initial Nestrov's velocities
         self._nest_v = 0
         # Dropout keeping probability
         self.pkeep = pkeep
-        # Layer's number
-        self.l_no = layer_no
 
     def layer_update_eq(self, cost_fn, learning_rate, decay_rate, eps, mu):
         """Returns the layer's update equation for training the weights
@@ -98,7 +96,7 @@ class FinalLayer():
         # Weight initial random values
         self._w_init = np.random.randn(self._input_feat, self._classes) / np.sqrt(self._input_feat + self._classes)
         # Updatable weights
-        self.weights = theano.shared(self._w_init, 'W')
+        self.weights = theano.shared(self._w_init, 'W_Final')
         # Layer's initial cache for RMSProp
         self._cache = 0
         # Initial Nestrov's velocities
