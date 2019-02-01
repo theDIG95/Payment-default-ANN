@@ -477,7 +477,7 @@ class ANNClassifier():
         for l_no, layer in enumerate(self._h_layers):
             layer.weights = theano.shared(weights_list[l_no], 'W')
 
-    def fit(self, inputs, targets, no_iters, parts_train, batch_size, thresh=1e-10, thresh_limit=100, plot_errs=False, plot_confusion=False, confusion_labels=None):
+    def fit(self, inputs, targets, no_iters, parts_train, batch_size, thresh=1e-10, thresh_limit=100, plot_errs=False, confusion_labels=False):
         """Fit the model to the given data
         
         Arguments:
@@ -491,8 +491,7 @@ class ANNClassifier():
             thresh {int} -- Error percentage change which will break the iterations if met (default: {1e-10})
             thresh_limit {int} -- Number of continuos iterations for which the error threshold has to be met (default: {100})
             plot_errs {bool} -- Plot training costs and error rates (default: {False})
-            plot_confusion {bool} -- Plot confusion matrix for validation data(if True labels must be given) (default: {False})
-            confusion_labels {list} -- String labels for target labels (default: {None})
+            confusion_labels {list(string)} -- If given, will plot the confusion matrix for the testing part (default: {False})
         """
 
         # Iteration break threshold counter
@@ -558,7 +557,7 @@ class ANNClassifier():
         if plot_errs:
             self._plot_training(costs, err_rates)
         # Plot testing confusion matrix if needed
-        if plot_confusion:
+        if confusion_labels:
             self._plot_confusion_matrix(targets_test, test_pred, confusion_labels)
         # Return costs and error rates
         return(costs, err_rates, test_err)
@@ -627,7 +626,7 @@ def main():
     model = ANNClassifier(0.005, [3, 2], [1.0, 1.0, 1.0], 0.9, 0.9)
     inputs = model.add_input_bias_col(inputs)
     print('Fitting model to data...')
-    model.fit(inputs, targets, 1000, 10, 60, plot_errs=True, plot_confusion=True, confusion_labels=['c1', 'c2', 'c3', 'c4'])'''
+    model.fit(inputs, targets, 1000, 10, 60, plot_errs=True, confusion_labels=['c1', 'c2', 'c3', 'c4'])'''
 
     # Credit data
     print('Getting data...')
@@ -636,7 +635,7 @@ def main():
     model = ANNClassifier(0.005, [30, 20], [1.0, 1.0, 1.0], 0.9, 0.9)
     inputs = model.add_input_bias_col(inputs)
     print('Fitting model to data...')
-    model.fit(inputs, targets, 1000, 3, 250, plot_errs=True, plot_confusion=True, confusion_labels=['No', 'Yes'])
+    model.fit(inputs, targets, 1000, 3, 250, plot_errs=True, confusion_labels=['No', 'Yes'])
 
 if __name__ == '__main__':
     main()
